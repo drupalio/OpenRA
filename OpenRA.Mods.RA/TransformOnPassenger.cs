@@ -37,8 +37,11 @@ namespace OpenRA.Mods.RA
 		{
 			if (info.PassengerTypes.Contains(passenger.Info.Name) && transformTo != null)
 			{
-				self.CancelActivity();
-				self.QueueActivity( new Transform(self, transformTo) { Facing = self.Trait<IFacing>().Facing } );
+				self.World.AddFrameEndTask( w =>
+				{
+					self.CancelActivity();
+					self.QueueActivity( new Transform(self, transformTo) { Facing = self.Trait<IFacing>().Facing } );
+				});
 			}
 		}
 
