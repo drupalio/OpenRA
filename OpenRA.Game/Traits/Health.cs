@@ -97,12 +97,11 @@ namespace OpenRA.Traits
             foreach (var nd in self.TraitsImplementing<INotifyDamage>()
 			         .Concat(self.Owner.PlayerActor.TraitsImplementing<INotifyDamage>()))
 				nd.Damaged(self, ai);
-			
-			
+
 			if (DamageState != oldState)
 				foreach (var nd in self.TraitsImplementing<INotifyDamageStateChanged>())
 					nd.DamageStateChanged(self, ai);
-			
+
 			if (attacker != null && attacker.IsInWorld && !attacker.IsDead())
 				foreach (var nd in attacker.TraitsImplementing<INotifyAppliedDamage>()
 			         .Concat(attacker.Owner.PlayerActor.TraitsImplementing<INotifyAppliedDamage>()))
